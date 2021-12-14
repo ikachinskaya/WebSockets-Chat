@@ -7,7 +7,7 @@ const userSchema = new Schema(
       required: true,
       min: 1,
       max: 32,
-      default: 'Anon'
+      default: "Anon",
     },
   },
   { timestamps: Date }

@@ -1,14 +1,36 @@
+//ЛОГИКА ДЛЯ ЭКСПРЕССА
+//ЗАДАЧА: получать запросы от клиента
+
+//импортируем экспресс
 const express = require("express");
+
+//импортируем cors
 const cors = require("cors");
 
+//импортирует Message из моделей
 const { Message } = require("./models");
+
+//создаем экспресс-приложение
 const app = express();
 
+//разрешение на подключение к серверу, связано с политикой безопасности браузеров и серверов
 app.use(cors());
+
+//для обработки JSON-файлов
 app.use(express.json());
 
+/*
+маршрут для получения всех сообщений
+- ищем все сообщения
+- происходит, когда загружаем страницу
+*/
 app.get("/", async (req, res, next) => {
   try {
+    /*
+      связываем сообщение с юзером
+      populate - насели
+      exec - выполни
+    */
     const messages = Message.find()
       .populate("user")
       .exec((err, message) => {
@@ -22,6 +44,7 @@ app.get("/", async (req, res, next) => {
   }
 });
 
+//очень плохой обработчик ошибок
 app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err); //очень плохо
 });
