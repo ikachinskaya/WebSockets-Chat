@@ -5,18 +5,33 @@ import { bindActionCreators } from "redux";
 import * as MessageActionCreators from "./actions/messagesActionCreators";
 
 function App() {
+  //получаем значения из хранилища
   const { messages, isLoading, error } = useSelector((state) => state.chat);
+
+  //получаем функцию dispatch из хранилища
   const dispatch = useDispatch();
 
+  /*
+  bindActionCreators принимает MessageActionCreators и dispatch
+  и возвращает объект с функциями - генераторами экшенов, которые уже обернуты в dispatch, 
+  т.е. они могут вызываться напрямую
+  */
   const { getMessagesRequest, createMessageRequest } = bindActionCreators(
     MessageActionCreators,
     dispatch
   );
 
+  /*побочные эффекты
+  получаем все сообщения
+  */
   useEffect(() => {
     getMessagesRequest();
   }, []);
 
+  /*
+  скролл для чата
+  происходит, когда меняется сообщение
+  */
   useLayoutEffect(() => {
     document.title = "Main page";
     window.scrollTo({

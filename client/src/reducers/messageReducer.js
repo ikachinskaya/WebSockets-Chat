@@ -1,11 +1,17 @@
 import ACTIONS from "../actions";
 
+//начальное состояние, которое можно показать клиенту, пока будет формироваться запрос
 const initialState = {
   messages: [],
   isLoading: false,
   error: null,
 };
 
+/*
+функция, принимает состояние и действие(action из messageActionCreators.js) 
+для изменения этого состояния
+передается в combineReducers
+*/
 function messageReducer(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_MESSAGES_REQUEST:
@@ -36,6 +42,7 @@ function messageReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+        //берем сообщения из старого состояния и новое сообщение из actions
         messages: [...messages, message],
       };
     }

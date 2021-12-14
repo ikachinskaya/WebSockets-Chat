@@ -1,5 +1,7 @@
 import ACTIONS from ".";
 
+//payload - полезная нагрузка
+
 export function createMessageRequest(message) {
   return {
     type: ACTIONS.CREATE_MESSAGE_REQUEST,

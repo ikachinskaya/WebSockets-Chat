@@ -1,3 +1,7 @@
+/*
+объект с действиями
+на каждый запрос 
+*/
 const ACTIONS = {
   CREATE_MESSAGE_REQUEST: "CREATE_MESSAGE_REQUEST",
   CREATE_MESSAGE_SUCCESS: "CREATE_MESSAGE_SUCCESS",
